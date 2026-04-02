@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+# Search d_evs - GitHub
+O projeto foi desenvolvido utilizando a biblioteca React, com estilização via ChakraUI v2, e está disponível para acesso online através do link abaixo:
+[👉 Acesse o Search d_evs](https://seu-link-da-vercel-aqui.vercel.app/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 👤 Autor
+- Maurício Tavares de Melo
+- [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mauricio-tavares-de-melo/)
+- [![GitHub](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=FFF)](https://github.com/MauricioTdM)
 
-Currently, two official plugins are available:
+## 💻 Tecnologias utilizadas:
+- ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+- ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+- ![Chakra UI](https://img.shields.io/badge/Chakra_UI-319795?style=for-the-badge&logo=chakraui&logoColor=white)
+- ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Funcionalidades Implementadas
+- Busca de perfis de desenvolvedores na API pública do GitHub.
+- Exibição de repositórios públicos com paginação via scroll infinito.
+- Opção de ordenação dos repositórios (alfabética, criação ou atualização).
+- Internacionalização (i18n) para Português e Inglês.
+- Responsividade adaptada para diferentes tamanhos de tela.
+- Tratamento de erros e estados vazios para usuários não encontrados ou sem repositórios públicos.
 
-## React Compiler
+## 🧠 Decisões Técnicas
+- **Zod:** Utilizado para modelagem e validação rigorosa dos contratos da API, garantindo a integridade dos dados na interface.
+- **Scroll Nativo:** O scroll infinito foi implementado usando a API nativa IntersectionObserver do navegador, evitando bibliotecas pesadas e melhorando a performance geral.
+- **Otimização de Renderização:** Separação das chamadas de API em hooks de efeito distintos para evitar requisições de perfil desnecessárias ao trocar o filtro de ordenação da lista.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📂 Estrutura do Projeto
+- **src/assets**: Ícones e arquivos estáticos.
+- **src/components**: Componentes visuais reutilizáveis.
+- **src/pages**: Telas principais da aplicação (Home e Profile).
+- **src/schemas**: Validações de dados e tipagens com Zod.
+- **src/services**: Funções de comunicação e requisição com a API REST do GitHub.
+- **src/styles**: Configurações de tema customizado do Chakra UI.
 
-## Expanding the ESLint configuration
+## ⚙️ Como Executar o Projeto Localmente
+Siga os passos abaixo para configurar e executar o projeto localmente:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Clone o repositório** na sua máquina.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. **Instale as dependências**:
+Certifique-se de ter o Node.js instalado em sua máquina.
+Em seguida, abra o terminal do VSCode no diretório do projeto e execute:
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+3. **Variáveis de Ambiente**:
+Crie um arquivo `.env` na raiz do projeto e adicione seu token do GitHub para evitar limites de requisição:
+```bash
+VITE_GITHUB_TOKEN=seu_token_aqui
 ```
+
+4. **Inicie o servidor de desenvolvimento**:
+```bash
+npm run dev
+```
+
+5. **Acesse o projeto no navegador**:
+O projeto estará disponível em: http://localhost:5173
