@@ -6,6 +6,7 @@ export const repositorySchema = z.object({
     description: z.string().nullable(),
     updated_at: z.iso.datetime().nullable(),
     stargazers_count: z.number(),
+    html_url: z.url(),
 });
 
 export type Repository = z.infer<typeof repositorySchema>;

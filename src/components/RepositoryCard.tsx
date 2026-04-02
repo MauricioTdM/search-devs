@@ -1,4 +1,4 @@
-import { Box, Heading, Text, HStack } from '@chakra-ui/react';
+import { Box, Heading, Text, HStack, Link as ChakraLink } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import type { Repository } from '../schemas';
 import { StarIcon } from './icons';
@@ -18,12 +18,10 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
         const diffInMilliseconds = now.getTime() - date.getTime();
         const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
 
-        if (diffInDays === 0) return t('updated_today', 'Atualizado hoje');
-        if (diffInDays === 1) return t('updated_yesterday', 'Atualizado ontem');
-        
-        // TODO:
-        // No seu i18n, você pode criar uma chave "updated_days_ago": "Atualizado há {{count}} dias"
-        return t('updated_days_ago', { count: diffInDays, defaultValue: `Atualizado há ${diffInDays} dias` });
+        if (diffInDays === 0) return t('updated_today');
+        if (diffInDays === 1) return t('updated_yesterday');
+
+        return t('updated_days_ago', { count: diffInDays });
     };
 
     return (
@@ -40,7 +38,14 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
                 fontWeight="bold" 
                 mb={2}
             >
-                {repository.name}
+                <ChakraLink 
+                    href={repository.html_url} 
+                    isExternal 
+                    color="gray.800"
+                    _hover={{ color: "primary.500", textDecoration: "underline" }}
+                >
+                    {repository.name}
+                </ChakraLink>
             </Heading>
 
             {repository.description && (

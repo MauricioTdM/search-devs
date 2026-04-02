@@ -1,15 +1,20 @@
 import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Box, Flex, Spinner, Text, Select } from '@chakra-ui/react';
-
 import { Header } from '../../components/Header';
 import { getUserProfile, getUserRepositories } from '../../services';
 import type { User, Repository } from '../../schemas';
 import { UserInfoCard } from '../../components/UserInfoCard';
 import { RepositoryCard } from '../../components/RepositoryCard';
+import { useNavigate } from 'react-router-dom';
+import { EmptyState } from '../../components/EmptyState';
+import { Button } from '../../components/Button';
 
 export function Profile() {
     const { username } = useParams<{ username: string }>();
+    const { t } = useTranslation();
+    const navigate = useNavigate();
 
     const [user, setUser] = useState<User | null>(null);
     const [repos, setRepos] = useState<Repository[]>([]);
@@ -44,7 +49,6 @@ export function Profile() {
         fetchUser();
     }, [username]);
 
-    // EFEITO 2: Busca os Repositórios (Roda na montagem, na rolagem ou ao mudar a ordenação)
     useEffect(() => {
         async function fetchRepos() {
             if (!username) return;
@@ -70,9 +74,8 @@ export function Profile() {
             }
         }
         fetchRepos();
-    }, [username, page, sortField]); // O sortField entrou nas dependências!
+    }, [username, page, sortField]);
 
-    // EFEITO 3: O Scroll Infinito (Igualzinho ao que você já testou)
     useEffect(() => {
         const observer = new IntersectionObserver(
             entries => {
@@ -90,11 +93,10 @@ export function Profile() {
         return () => observer.disconnect();
     }, [hasMore, isLoadingMore, isLoadingRepos]);
 
-    // Função para lidar com a troca do filtro
     const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortField(event.target.value);
-        setPage(1); // Voltamos para a página 1
-        setRepos([]); // Limpamos a lista para o usuário ver que está carregando o novo filtro
+        setPage(1);
+        setRepos([]);
     };
 
     if (isLoadingUser) {
@@ -110,11 +112,17 @@ export function Profile() {
 
     if (hasError || !user) {
         return (
-            <Box w="100%" minH="100vh">
+            <Box w="100%" minH="100vh" bg="gray.50">
                 <Header />
-                <Flex w="100%" mt={20} justify="center">
-                    <Text fontSize="xl">Usuário não encontrado.</Text>
-                </Flex>
+                <EmptyState 
+                    title={t('ops_title')} 
+                    message={t('not_found')}
+                    action={
+                        <Button onClick={() => navigate('/')}>
+                            {t('back_to_home')}
+                        </Button>
+                    }
+                />
             </Box>
         );
     }
@@ -131,7 +139,7 @@ export function Profile() {
                 <Box flex="1">
                     <Flex justify="space-between" align="center" mb={4} flexWrap="wrap" gap={4}>
                         <Text fontSize="2xl" color="primary.500" fontWeight="bold">
-                            Repositórios
+                            {t('repositories')}
                         </Text>
                         
                         <Select 
@@ -142,9 +150,9 @@ export function Profile() {
                             _focus={{ borderColor: "primary.500", boxShadow: "0 0 0 1px #8C19D2" }}
                             bg="white"
                         >
-                            <option value="pushed">Atualizados recentemente</option>
-                            <option value="created">Criados recentemente</option>
-                            <option value="full_name">Ordem alfabética</option>
+                            <option value="pushed">{t('repositories_sort_updated')}</option>
+                            <option value="created">{t('repositories_sort_created')}</option>
+                            <option value="full_name">{t('repositories_sort_alphabetical')}</option>
                         </Select>
                     </Flex>
                     
