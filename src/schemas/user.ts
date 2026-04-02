@@ -9,7 +9,7 @@ export const userSchema = z.object({
     following: z.number(),
     company: z.string().nullable(),
     location: z.string().nullable(),
-    email: z.email().nullable,
+    email: z.string().nullable(),
     blog: z.string().nullable(),
     twitter_username: z.string().nullable(),
 });

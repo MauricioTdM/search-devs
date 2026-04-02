@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Flex, VStack, Heading, Text } from '@chakra-ui/react';
-import { SearchIcon } from '../../components/icons/SearchIcon';
+import { SearchIcon } from '../../components/icons';
 
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
