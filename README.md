@@ -1,6 +1,6 @@
 # Search d_evs - GitHub
 O projeto foi desenvolvido utilizando a biblioteca React, com estilização via ChakraUI v2, e está disponível para acesso online através do link abaixo:
-[👉 Acesse o Search d_evs](https://seu-link-da-vercel-aqui.vercel.app/)
+[👉 Acesse o Search d_evs](https://search-devs-gamma.vercel.app/)
 
 ## 👤 Autor
 - Maurício Tavares de Melo
