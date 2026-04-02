@@ -3,7 +3,7 @@ import { VStack, Heading, Text, Box } from '@chakra-ui/react';
 interface EmptyStateProps {
     title: string;
     message: string;
-    action?: React.ReactNode; // Permite passar um botão customizado, se precisar
+    action?: React.ReactNode;
 }
 
 export function EmptyState({ title, message, action }: EmptyStateProps) {
