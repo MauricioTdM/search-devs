@@ -1,11 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "./assets/vite.svg";
+import heroImg from "./assets/hero.png";
+import "./App.css";
+import { useTranslation } from "react-i18next";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const { t, i18n } = useTranslation();
 
   return (
     <>
@@ -17,6 +19,17 @@ function App() {
         </div>
         <div>
           <h1>Get started</h1>
+          <h2>{t("not_found")}</h2>
+
+          {/* Botão temporário para testar a troca de idioma */}
+          <button
+            style={{ margin: "10px 0", padding: "8px", cursor: "pointer" }}
+            onClick={() =>
+              i18n.changeLanguage(i18n.language === "pt" ? "en" : "pt")
+            }
+          >
+            Trocar Idioma (Atual: {i18n.language})
+          </button>
           <p>
             Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
           </p>
@@ -115,7 +128,7 @@ function App() {
       <div className="ticks"></div>
       <section id="spacer"></section>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
